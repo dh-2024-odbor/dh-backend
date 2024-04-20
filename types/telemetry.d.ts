@@ -8,3 +8,15 @@ export interface Telemetry {
     [key: string]: number
   }
 }
+
+export enum DataFormat {
+  tph01 = 'tph01'
+}
+
+export interface NodeDetails {
+  _id: string;
+  nodeId: number;
+  features: string[];
+  format: DataFormat;
+  label: string;
+}

@@ -1,9 +1,16 @@
+GET http://[::1]:3000/api/data HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <BEARER_TOKEN>
+
+###
+
+
 POST http://[::1]:3000/api/data HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer YOUR_ACCESS_TOKEN
+Authorization: Basic <BASIC_TOKEN>
 
 {
-  "i": 8,
+  "i": 10,
   "t": 1713606176092,
   "d": {
     "t": 22.6,
