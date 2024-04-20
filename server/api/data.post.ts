@@ -6,9 +6,9 @@ import useAuthenticatedDevice from '../utils/useAuthenticatedDevice';
 export default defineEventHandler(async (event) => {
   const device = useAuthenticatedDevice(event);
 
-  const { nodeId, eventId, dataBuffer } = await getEventDetails(event);
+  const { nodeId, messageId, dataBuffer } = await getEventDetails(event);
 
-  console.log({ nodeId });
+  console.log({ nodeId, messageId });
  
   try {
     const nodeDetails = await mongoClient.collection('nodes').findOne<NodeDetails>({ nodeId });
@@ -29,6 +29,7 @@ export default defineEventHandler(async (event) => {
   
     const result = await mongoClient.collection('telemetry').insertOne({
       nodeId: nodeId,
+      messageId: messageId,
       data: parsedData,
       timestamp: new Date(),
     });

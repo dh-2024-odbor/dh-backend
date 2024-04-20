@@ -31,11 +31,11 @@ export default defineEventHandler(async (event) => {
 
   const nodeId = dataBuffer.readUInt32LE();
 
-  const eventId = dataBuffer.readUInt32LE(4);
+  const messageId = dataBuffer.readUInt32LE(4);
 
   return {
     nodeId,
-    eventId,
+    messageId,
     dataBuffer,
   };
 });

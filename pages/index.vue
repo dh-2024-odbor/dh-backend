@@ -37,10 +37,10 @@ const telemetryData = await useFetch('/api/data', {
     </LayoutCategoryPanel>
 
 
-    <LayoutCategoryPanel v-if="isAuthenticated ||true" title="Data">
+    <LayoutCategoryPanel v-if="isAuthenticated" title="Data">
       <template #buttons>
       </template>
-      <p>{{ telemetryData.data }}</p>
+      <p>{{ telemetryData.data ?? '' }}</p>
     </LayoutCategoryPanel>
 
 
