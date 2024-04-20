@@ -1,6 +1,8 @@
 const binaryStringToBuffer = (string: string) => {
-  const groups = string.match(/[01]{8}/g);
-  const numbers = groups?.map((binary) => parseInt(binary, 2))
+    console.log({string});
+  const groups = string.match(/.{4}/g);
+
+  const numbers = groups?.map((binary) => parseInt(binary, 16))
 
   if (!numbers) {
     throw createError({
@@ -9,11 +11,11 @@ const binaryStringToBuffer = (string: string) => {
     });
   }
 
-  return Buffer.from(numbers);
+  return Buffer.from(string, 'hex');
 }
 
 export default defineEventHandler(async (event) => {
-  const body = await readRawBody(event, 'utf8');
+  const body = await readRawBody(event, 'hex');
 
   console.log(body);
   if (!body) {
@@ -27,9 +29,9 @@ export default defineEventHandler(async (event) => {
 
   console.log(dataBuffer);
 
-  const nodeId = dataBuffer.readUInt32BE();
+  const nodeId = dataBuffer.readUInt32LE();
 
-  const eventId = dataBuffer.readUInt32BE(4);
+  const eventId = dataBuffer.readUInt32LE(4);
 
   return {
     nodeId,
