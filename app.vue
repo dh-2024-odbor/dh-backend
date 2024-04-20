@@ -12,7 +12,7 @@ useHead({
 <template>
   <div class="sidebar-and-content-wrapper">
     <LayoutMainSidebar />
-    <RouterView />
+    <NuxtPage />
   </div>
 </template>
 
