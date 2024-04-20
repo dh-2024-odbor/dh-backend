@@ -1,0 +1,13 @@
+POST http://[::1]:3000/api/data HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+{
+  "i": 8,
+  "t": 1713606176092,
+  "d": {
+    "t": 22.6,
+    "h": 0.67,
+    "p": 1013.5
+  }
+}

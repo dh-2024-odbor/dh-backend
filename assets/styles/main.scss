@@ -1,0 +1,59 @@
+@import './base.scss';
+
+html {
+  background: var(--gradient-background);
+}
+
+body {
+  font-family: var(--md-sys-typescale-body-medium-font-family-name);
+  font-style: var(--md-sys-typescale-body-medium-font-family-style);
+  font-weight: var(--md-sys-typescale-body-medium-font-weight);
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  letter-spacing: var(--md-sys-typescale-body-medium-tracking);
+  line-height: var(--md-sys-typescale-body-medium-height);
+  text-transform: var(--md-sys-typescale-body-medium-text-transform);
+  text-decoration: var(--md-sys-typescale-body-medium-text-decoration);
+
+  color: var(--color-on-background);
+
+  overflow-y: visible;
+  overflow-x: hidden !important;
+  min-height: 100vh;
+  height: 0;
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  text-decoration: none;
+}
+
+#app {
+  height: 100vh;
+}
+
+#app.page-fade-in .page-content {
+  animation: 0.25s pageFadeInBottom;
+}
+
+@keyframes pageFadeInBottom {
+  from {
+    padding-top: 50px;
+    min-height: calc(100vh - 170px);
+  }
+
+  to {
+    padding-top: 0px;
+    min-height: calc(100vh - 120px);
+  }
+}
+
+.disabled-element {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+:root {
+  --profile-picture-size: 32px;
+}
