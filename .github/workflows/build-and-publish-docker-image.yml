@@ -5,7 +5,7 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: dh-2024-odbor
+  IMAGE_NAME: dh-backend
 
 jobs:
   docker-api:
