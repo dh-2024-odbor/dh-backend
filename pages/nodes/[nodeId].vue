@@ -24,8 +24,14 @@ const { data: node, status: nodeStatus } = useFetch<{[key: string]: any}>(`/api/
   headers: await getAuthHeaders(),
 });
 
-const { data: telemetry, status: telemetryStatus } = useFetch<{data: {[key: string]: any}, [key: string]: any}[]>(`/api/telemetry/${nodeId}`, {
+const { data: telemetry, status: telemetryStatus, refresh: telemetryRefresh } = useFetch<{data: {[key: string]: any}, [key: string]: any}[]>(`/api/telemetry/${nodeId}`, {
   headers: await getAuthHeaders(),
+});
+
+onMounted(() => {
+  setInterval(() => {
+    telemetryRefresh();
+  }, 5000);
 });
 
 const lastTelemetry = computed(() => telemetry.value?.at(telemetry.value?.length - 1));
@@ -96,12 +102,11 @@ const chartData = computed<{[key: string]: any}>(() => {
 </script>
 
 <template>
-  <LayoutPageWrapper :is-narrow="true" v-if="nodeStatus === 'success'">
+  <LayoutPageWrapper :is-narrow="false" v-if="nodeStatus === 'success'">
     <GoBackButton to="/home" />
     <LayoutPageTitle title="Node" />
-
     <LayoutCategoryPanel :title="node?.label">
-      <template #buttons v-if="telemetryStatus === 'success'">
+      <template #buttons>
         <LastSeen :timestamp="lastTelemetry?.timestamp" />
       </template>
       <p>Last update: {{ new Date(lastTelemetry?.timestamp).toLocaleString('sl') }}</p>
@@ -109,14 +114,15 @@ const chartData = computed<{[key: string]: any}>(() => {
         <b>{{ key }}</b>: {{ lastTelemetry?.data[key] || 'N/A' }}
       </p>
     </LayoutCategoryPanel>
+    <div class="grid-view">
 
-    <LayoutCategoryPanel :title="key" v-for="key in Object.keys(telemetry?.at(0)?.data || {})" class="telemetry-data" >
-      <ChartJsLine
-        v-if="telemetryStatus === 'success'"
-        :chart-options="chartOptions"
-        :chart-data="chartData != null && chartData ? (chartData[key] as {[key: string]: any}) : {}"
-      />
-    </LayoutCategoryPanel>
+      <LayoutCategoryPanel :title="key" v-for="key in Object.keys(telemetry?.at(0)?.data || {})" class="telemetry-data" >
+        <ChartJsLine
+          :chart-options="chartOptions"
+          :chart-data="chartData != null && chartData ? (chartData[key] as {[key: string]: any}) : {}"
+        />
+      </LayoutCategoryPanel>
+    </div>
   </LayoutPageWrapper>
 </template>
 
@@ -128,5 +134,11 @@ const chartData = computed<{[key: string]: any}>(() => {
 
 :deep(.telemetry-data.category h1) {
   text-transform: capitalize;
+}
+
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr) );
+  gap: 1rem;
 }
 </style>

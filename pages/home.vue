@@ -33,14 +33,14 @@ const { data: nodes } = useFetch<{[key: string]: any}[]>('/api/nodes', {
 
     <LayoutCategoryPanel v-for="node in nodes" :title="node.label">
       <template #buttons>
-        <LastSeen :timestamp="node?.telemetry.timestamp" />
+        <LastSeen :timestamp="node?.telemetry?.timestamp" />
         <InputPrimaryButton @click="() => $router.push(`/nodes/${node.nodeId}`)">View</InputPrimaryButton>
       </template>
 
-      <p>Last update: {{ new Date(node?.telemetry.timestamp).toLocaleString('sl') }}</p>
+      <p>Last update: {{ new Date(node?.telemetry?.timestamp).toLocaleString('sl') }}</p>
       
-      <p class="property" v-for="key in Object.keys(node.telemetry.data)">
-       <b>{{ key }}</b>: {{ node.telemetry.data[key] }}
+      <p class="property" v-for="key in Object.keys(node?.telemetry?.data || {})">
+       <b>{{ key }}</b>: {{ node?.telemetry?.data[key] }}
       </p>
     </LayoutCategoryPanel>
 
