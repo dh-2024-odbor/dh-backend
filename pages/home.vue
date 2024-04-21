@@ -16,10 +16,6 @@ const { data: nodes } = useFetch<{[key: string]: any}[]>('/api/nodes', {
   headers: await getAuthHeaders(),
 });
 
-const telemetryData = await useFetch('/api/data', {
-  headers: await getAuthHeaders(),
-});
-
 </script>
 
 
@@ -36,6 +32,11 @@ const telemetryData = await useFetch('/api/data', {
     <LayoutPageTitle title="Nodes" />
 
     <LayoutCategoryPanel v-for="node in nodes" :title="node.label">
+      <template #buttons>
+        <LastSeen :timestamp="node?.telemetry.timestamp" />
+        <InputPrimaryButton @click="() => $router.push(`/nodes/${node.nodeId}`)">View</InputPrimaryButton>
+      </template>
+
       <p>Last update: {{ new Date(node?.telemetry.timestamp).toLocaleString('sl') }}</p>
       
       <p class="property" v-for="key in Object.keys(node.telemetry.data)">
@@ -49,7 +50,8 @@ const telemetryData = await useFetch('/api/data', {
 
 <style lang="scss" scoped>
 .property {
-  margin-top: 8px;
+  margin-top: 0.5rem;
   text-transform: capitalize;
 }
+
 </style>

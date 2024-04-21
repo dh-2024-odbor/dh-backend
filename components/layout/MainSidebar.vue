@@ -31,12 +31,12 @@ watch([currentMainRoute], () => {
   <div class="sidebar-wrapper" v-if="currentMainRoute?.meta?.mainSidebarType">
     <div class="main-sidebar">
       <div class="branding-item-wrapper">
-        <router-link to="/home" class="branding-item">
+        <NuxtLink to="/home" class="branding-item">
           Logo
-        </router-link>
+        </NuxtLink>
       </div>
 
-      <router-link
+      <NuxtLink
         :key="i"
         v-for="(e, i) in pages"
         :to="e.path"
@@ -46,7 +46,7 @@ watch([currentMainRoute], () => {
         <Icon v-show="e.path === currentMainRoute.name && e.activeIcon" :icon="e.activeIcon!" />
         <Icon v-show="!(e.path === currentMainRoute.name && e.activeIcon)" :icon="e.icon!" />
         <span>{{ e.labelKey! }}</span>
-      </router-link>
+      </NuxtLink>
     </div>
   </div>
 </template>
