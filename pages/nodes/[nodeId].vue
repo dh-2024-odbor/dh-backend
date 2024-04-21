@@ -90,8 +90,6 @@ const chartData = computed<{[key: string]: any}>(() => {
     },
   }), {});
 
-  console.log(data);
-  
   return data;
    
  

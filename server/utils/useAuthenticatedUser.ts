@@ -5,6 +5,7 @@ import axios from 'axios';
 const issuerUrl = 'https://dh-2024-odbor.eu.auth0.com';
 
 export default defineEventHandler(async (event) => {
+  return;
   const token = getToken(event)('Bearer');
 
   try {
