@@ -1,11 +1,5 @@
 @import './theme/theme.scss';
 
-:root {
-  --main-sidebar-width: 84px;
-  --sub-sidebar-width: 264px;
-}
-
-
 .clickable > * {
   transition: 0.1s ease-in-out;
 }

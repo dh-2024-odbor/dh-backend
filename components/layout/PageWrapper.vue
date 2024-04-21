@@ -19,11 +19,7 @@ const route = useRoute();
 const isSidePanelVisible = computed(() => !!slots['side-panel']);
 
 const shouldAdjustCenter = computed(
-  () =>
-    !isSidePanelVisible.value &&
-    props.isNarrow &&
-    ((route.matched[0] as any)?.children?.filter((e: any) => e.meta?.showInMainSidebar) || [])
-      .length >= 1
+  () => !isSidePanelVisible.value && props.isNarrow
 );
 </script>
 

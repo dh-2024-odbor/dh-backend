@@ -11,7 +11,6 @@ useHead({
 
 <template>
   <div class="sidebar-and-content-wrapper">
-    <LayoutMainSidebar />
     <NuxtPage />
   </div>
 </template>
@@ -24,6 +23,5 @@ useHead({
   display: flex;
   flex-direction: row;
   height: 100%;
-  padding-left: var(--main-sidebar-width);
 }
 </style>
